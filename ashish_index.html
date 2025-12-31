@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Interactive Web Page</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: #ffffff;
+            width: 420px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 { color: #333; }
+        p { color: #666; font-size: 14px; }
+
+        .section {
+            margin-top: 20px;
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
+            border: 1px solid #ccc;
+            font-size: 14px;
+        }
+
+        button {
+            margin-top: 8px;
+            padding: 10px 22px;
+            border: none;
+            border-radius: 8px;
+            background: #667eea;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+
+        button:hover { background: #5568d9; }
+
+        .output {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        img {
+            width: 90%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        video {
+            width: 100%;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+    <h1>Advanced Interactive Web Page</h1>
+    <p>Greeting | Calculator | Theme | Media</p>
+
+    <!-- Greeting -->
+    <div class="section">
+        <h3>Greeting Feature</h3>
+        <input type="text" id="name" placeholder="Enter your name">
+        <button onclick="greet()">Greet Me</button>
+        <div class="output" id="greetOutput"></div>
+    </div>
+
+    <!-- Calculator -->
+    <div class="section">
+        <h3>Simple Calculator</h3>
+        <input type="number" id="num1" placeholder="Enter first number">
+        <input type="number" id="num2" placeholder="Enter second number">
+
+        <select id="operator">
+            <option value="+">Addition (+)</option>
+            <option value="-">Subtraction (-)</option>
+            <option value="*">Multiplication (×)</option>
+            <option value="/">Division (÷)</option>
+        </select>
+
+        <button onclick="calculate()">Calculate</button>
+        <div class="output" id="calcOutput"></div>
+    </div>
+
+    <!-- Image -->
+    <div class="section">
+        <h3>Image Media</h3>
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Sample Image">
+    </div>
+
+    <!-- Audio -->
+    <div class="section">
+        <h3>Audio Player</h3>
+        <audio id="music" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+        <button onclick="playMusic()">Play</button>
+        <button onclick="pauseMusic()">Pause</button>
+    </div>
+
+    <!-- Video -->
+    <div class="section">
+        <h3>Video Player</h3>
+        <video controls>
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+        </video>
+    </div>
+
+    <!-- Theme -->
+    <div class="section">
+        <h3>Theme Changer</h3>
+        <button onclick="changeTheme()">Change Background</button>
+    </div>
+</div>
+
+<script>
+    function greet() {
+        let name = document.getElementById("name").value;
+        document.getElementById("greetOutput").innerHTML =
+            name.trim() === "" ? "Please enter your name." : "Hello " + name + "!";
+    }
+
+    function calculate() {
+        let a = parseFloat(num1.value);
+        let b = parseFloat(num2.value);
+        let op = operator.value;
+
+        if (isNaN(a) || isNaN(b)) {
+            calcOutput.innerHTML = "Enter valid numbers.";
+            return;
+        }
+
+        let r;
+        if (op === "+") r = a + b;
+        else if (op === "-") r = a - b;
+        else if (op === "*") r = a * b;
+        else if (op === "/") r = b === 0 ? "Cannot divide by zero" : a / b;
+
+        calcOutput.innerHTML = "Result: " + r;
+    }
+
+    function changeTheme() {
+        let themes = [
+            "linear-gradient(135deg,#667eea,#764ba2)",
+            "linear-gradient(135deg,#ff758c,#ff7eb3)",
+            "linear-gradient(135deg,#43cea2,#185a9d)",
+            "linear-gradient(135deg,#f7971e,#ffd200)"
+        ];
+        document.body.style.background =
+            themes[Math.floor(Math.random() * themes.length)];
+    }
+
+    function playMusic() {
+        document.getElementById("music").play();
+    }
+
+    function pauseMusic() {
+        document.getElementById("music").pause();
+    }
+</script>
+
+</body>
+</html>
